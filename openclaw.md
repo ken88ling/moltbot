@@ -103,6 +103,28 @@ openclaw gateway --port 18789 --verbose
 
 ---
 
+## 🔒 Private Repository (How to "Fork" Privately)
+
+If you want to keep your modifications in a **private** repository while still pulling the latest changes from the original OpenClaw:
+
+1.  **Create a New Private Repo**: Go to GitHub and create a new repository. **Do not** use the "Fork" button. Set it to **Private**.
+2.  **Add it as a Remote**:
+    ```bash
+    git remote add personal <YOUR_PRIVATE_REPO_URL>
+    ```
+3.  **Push your code**:
+    ```bash
+    git push personal alastair-custom
+    ```
+4.  **Syncing with Upstream**:
+    When you want to pull the latest official updates into your private version:
+    ```bash
+    git pull origin main
+    git push personal alastair-custom
+    ```
+
+---
+
 ## 🧩 Key Subsystems
 *   **Gateway**: The central control plane (WebSocket server).
 *   **Channels**: Connectors for WhatsApp, Telegram, Slack, Discord, Signal, iMessage, and more.
