@@ -44,8 +44,9 @@ pnpm link --global
 
 ## The two-phone setup (recommended)
 
-You want this:
+You want this to keep your personal messages separate from agent inputs.
 
+### WhatsApp
 ```
 Your Phone (personal)          Second Phone (assistant)
 ┌─────────────────┐           ┌─────────────────┐
@@ -62,6 +63,23 @@ Your Phone (personal)          Second Phone (assistant)
 ```
 
 If you link your personal WhatsApp to OpenClaw, every message to you becomes “agent input”. That’s rarely what you want.
+
+### Telegram
+For Telegram, create a dedicated bot via [@BotFather](https://t.me/botfather).
+```
+Your Telegram (personal)       Telegram Cloud (Bot)
+┌─────────────────┐           ┌─────────────────┐
+│  @YourHandle    │  ──────▶  │  @YourAgentBot  │
+└─────────────────┘  message  └────────┬────────┘
+                                       │ Bot Token
+                                       ▼
+                              ┌─────────────────┐
+                              │  Your Mac       │
+                              │  (openclaw)      │
+                              │    Pi agent     │
+                              └─────────────────┘
+```
+Set your `TELEGRAM_BOT_TOKEN` and you're ready to go.
 
 ## 5-minute quick start
 
@@ -233,3 +251,27 @@ Logs live under `/tmp/openclaw/` (default: `openclaw-YYYY-MM-DD.log`).
 - Windows status: [Windows (WSL2)](/platforms/windows)
 - Linux status: [Linux app](/platforms/linux)
 - Security: [Security](/gateway/security)
+
+## Staying up-to-date
+
+To pull the latest changes and update your instance:
+
+1. **Pull newer code**:
+   ```bash
+   git pull origin main
+   ```
+2. **Re-sync dependencies**:
+   ```bash
+   pnpm install
+   pnpm ui:build
+   pnpm build
+   ```
+3. **Restart the gateway**:
+   ```bash
+   openclaw gateway --port 18789
+   ```
+
+To switch between development channels (stable/beta/dev):
+```bash
+openclaw update --channel stable
+```
